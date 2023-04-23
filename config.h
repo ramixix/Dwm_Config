@@ -63,9 +63,11 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-static const char *web[] = { "firefox", NULL };
-static const char *screenshot[] = { "flameshot", "gui" , NULL};
-static const char *discord[] = { "Discord", NULL };
+static const char *web[] = { "/usr/bin/firefox", NULL };
+static const char *screenshot[] = { "/usr/bin/flameshot", "gui" , NULL};
+static const char *discord[] = { "/usr/bin/Discord", NULL };
+
+static const char *file_manager[] = { "/usr/bin/nemo", NULL};
 
 // Volume
 static const char *upvol[] = { "/usr/bin/amixer", "set", "Master", "5%+", NULL };
@@ -79,6 +81,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_w,      spawn,	   {.v = web } },
 	{ MODKEY|ShiftMask,		XK_s,	   spawn,	   {.v = screenshot} },
 	{ MODKEY|ShiftMask, 		XK_d,      spawn,	   {.v = discord} },
+	{ MODKEY|ShiftMask,		XK_f,	   spawn,	   {.v = file_manager} },
 	{ 0,				XF86XK_AudioLowerVolume,	spawn, {.v = downvol } },
 	{ 0,				XF86XK_AudioMute,		spawn, {.v = mutevol } },
 	{ 0,				XF86XK_AudioRaiseVolume,	spawn, {.v = upvol   } },
