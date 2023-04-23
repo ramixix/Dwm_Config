@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
+// added this header file to use keys for increasing and decreasing volume and brightness
+#include <X11/XF86keysym.h>
+
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -10,8 +14,8 @@ static const char dmenufont[]       = "monospace:size=13";
 static const char col_gray1[]       = "#282a36";
 static const char col_gray2[]       = "#282a36";
 static const char col_gray3[]       = "#96b5b4";
-static const char col_gray4[]       = "#d7d7d7";
-static const char col_cyan[]        = "#4d4d4d";
+static const char col_gray4[]       = "#fcf9f9";
+static const char col_cyan[]        = "#534e96";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -58,9 +62,15 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+
 static const char *web[] = { "firefox", NULL };
 static const char *screenshot[] = { "flameshot", "gui" , NULL};
 static const char *discord[] = { "Discord", NULL };
+
+// Volume
+static const char *upvol[] = { "/usr/bin/amixer", "set", "Master", "5%+", NULL };
+static const char *downvol[] = { "/usr/bin/amixer", "set", "Master", "5%-", NULL };
+static const char *mutevol[] = { "/usr/bin/amixer", "set", "Master", "toggle", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -69,6 +79,9 @@ static const Key keys[] = {
 	{ MODKEY,			XK_w,      spawn,	   {.v = web } },
 	{ MODKEY|ShiftMask,		XK_s,	   spawn,	   {.v = screenshot} },
 	{ MODKEY|ShiftMask, 		XK_d,      spawn,	   {.v = discord} },
+	{ 0,				XF86XK_AudioLowerVolume,	spawn, {.v = downvol } },
+	{ 0,				XF86XK_AudioMute,		spawn, {.v = mutevol } },
+	{ 0,				XF86XK_AudioRaiseVolume,	spawn, {.v = upvol   } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
